@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkyVenture Travel & Tours</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f6f8;color:#17243a}
+header{background:#07182d;color:#d9b65d;padding:20px 7%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:bold;letter-spacing:2px}
+nav a{color:white;text-decoration:none;margin-left:18px;font-size:14px}
+.hero{background:linear-gradient(90deg,rgba(3,16,34,.88),rgba(3,16,34,.35)),url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600') center/cover;min-height:430px;padding:85px 8%;color:white}
+.hero h1{font-size:42px;color:#e3c36f;max-width:600px}
+.hero p{font-size:18px}
+button{background:#d5ae55;color:#07182d;border:0;padding:14px 22px;border-radius:5px;font-weight:bold;cursor:pointer}
+section{padding:45px 8%}
+h2{color:#102542}
+.booking{background:white;padding:25px;border-radius:12px;box-shadow:0 3px 15px #0001}
+.tabs{display:flex;gap:12px;margin-bottom:20px}
+input,select{width:100%;padding:13px;margin:7px 0 16px;border:1px solid #ccd1d8;border-radius:5px}
+label{font-size:13px;font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+.card{background:white;padding:20px;border-radius:10px}
+footer{background:#07182d;color:white;text-align:center;padding:30px}
+footer a{color:#e3c36f}
+@media(max-width:600px){nav{display:none}.hero h1{font-size:32px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">SKYVENTURE</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#hotels">Hotels</a>
+<a href="#flights">Flights</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<div class="hero" id="home">
+<h1>Discover. Explore. Experience.</h1>
+<p>Your journey begins with SkyVenture Travel & Tours.</p>
+<a href="#hotels"><button>EXPLORE HOTELS</button></a>
+</div>
+
+<section id="hotels">
+<h2>Find Your Perfect Hotel</h2>
+<div class="booking">
+<form id="hotelForm">
+<div class="grid">
+<div><label>Destination</label>
+<input name="destination" placeholder="Where do you want to stay?" required></div>
+<div><label>Check-in</label>
+<input type="date" name="checkin" required></div>
+<div><label>Check-out</label>
+<input type="date" name="checkout" required></div>
+<div><label>Guests</label>
+<select name="guests"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+</div>
+<button type="submit">REQUEST HOTEL BOOKING</button>
+</form>
+</div>
+</section>
+
+<section id="flights">
+<h2>Flight Ticketing</h2>
+<div class="booking">
+<form id="flightForm">
+<div class="grid">
+<div><label>From</label><input name="origin" placeholder="Departure city" required></div>
+<div><label>To</label><input name="destination" placeholder="Arrival city" required></div>
+<div><label>Departure</label><input name="departure" type="date" required></div>
+<div><label>Passengers</label><select name="passengers"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+</div>
+<button type="submit">REQUEST FLIGHT TICKET</button>
+</form>
+</div>
+</section>
+
+<section>
+<h2>Why Choose SkyVenture?</h2>
+<div class="grid">
+<div class="card"><h3>Hotel Reservations</h3><p>Explore accommodation options for your next trip.</p></div>
+<div class="card"><h3>Flight Assistance</h3><p>Get assistance with your flight ticket requests.</p></div>
+<div class="card"><h3>Personal Support</h3><p>Our team is ready to assist with your travel plans.</p></div>
+</div>
+</section>
+
+<footer id="contact">
+<h2 style="color:#e3c36f">SKYVENTURE TRAVEL & TOURS</h2>
+<p>Your Journey, Our Passion.</p>
+<p>For booking inquiries, contact us through Messenger.</p>
+<a href="https://www.facebook.com/skyventure2026" target="_blank">CONTACT US ON FACEBOOK</a>
+<p>© 2026 SkyVenture Travel & Tours</p>
+</footer>
+
+<script>
+function sendRequest(form,type){
+const data=new FormData(form);
+let message="SkyVenture "+type+" Request\n";
+for(const [key,value] of data.entries()){
+message+=key+": "+value+"\n";
+}
+const url="https://www.facebook.com/skyventure2026";
+alert("Your request details:\n"+message+"\nPlease send this request through our Facebook Messenger.");
+window.open(url,"_blank");
+}
+document.getElementById("hotelForm").addEventListener("submit",function(e){
+e.preventDefault();sendRequest(this,"Hotel Booking");
+});
+document.getElementById("flightForm").addEventListener("submit",function(e){
+e.preventDefault();sendRequest(this,"Flight Ticket");
+});
+</script>
+</body>
+</html>
