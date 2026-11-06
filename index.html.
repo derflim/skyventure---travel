@@ -49,6 +49,8 @@ button.submit,.book{display:inline-block;background:var(--navy);color:white;bord
 </main><footer>© 2026 SkyVenture Travel & Tours · Luxury journeys, thoughtfully planned.</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+// SUPABASE HOTEL TABLE: hotel_bookings
+// SUPABASE FLIGHT TABLE: flight_requests
 const SUPABASE_URL='https://ueulepjbivwjukqslbxc.supabase.co';
 const SUPABASE_KEY='sb_publishable_3zPyDad1AAHGaZlE-vdKXA_dxurgK6L';
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
@@ -56,7 +58,11 @@ document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>
 const tripType=document.getElementById('tripType'),returnWrap=document.getElementById('returnWrap'),returnDate=document.getElementById('returnDate');
 tripType.addEventListener('change',()=>{const round=tripType.value==='Round-trip';returnWrap.classList.toggle('hidden',!round);returnDate.required=round;if(!round)returnDate.value=''});
 function formData(form){return Object.fromEntries(new FormData(form).entries())}
-document.getElementById('hotelForm').addEventListener('submit',async e=>{e.preventDefault();const status=document.getElementById('hotelStatus');status.textContent='Sending request...';const payload=formData(e.target);payload.guests=Number(payload.guests);payload.status='Pending';const {error}=await db.from('hotel_bookings').insert(payload);status.textContent=error?'Could not send. Please check the form/database setup or message us on Facebook.':'Request sent! This is not yet a confirmed booking.';if(!error)e.target.reset()});
-document.getElementById('flightForm').addEventListener('submit',async e=>{e.preventDefault();const status=document.getElementById('flightStatus');status.textContent='Sending request...';const payload=formData(e.target);payload.passengers=Number(payload.passengers);payload.status='Pending';if(!payload.return_date)delete payload.return_date;const {error}=await db.from('flight_requests').insert(payload);status.textContent=error?'Could not send. Please check the form/database setup or message us on Facebook.':'Request sent! This is not yet a confirmed ticket.';if(!error)e.target.reset();returnWrap.classList.add('hidden')});
+document.getElementById('hotelForm').addEventListener('submit',async e=>{e.preventDefault();const status=document.getElementById('hotelStatus');status.textContent='Sending request...';const payload=formData(e.target);payload.guests=Number(payload.guests);payload.status='Pending';const {error}=await db
+  .from('hotel_bookings')
+  .insert(payload);status.textContent=error?'Could not send. Please check the form/database setup or message us on Facebook.':'Request sent! This is not yet a confirmed booking.';if(!error)e.target.reset()});
+document.getElementById('flightForm').addEventListener('submit',async e=>{e.preventDefault();const status=document.getElementById('flightStatus');status.textContent='Sending request...';const payload=formData(e.target);payload.passengers=Number(payload.passengers);payload.status='Pending';if(!payload.return_date)delete payload.return_date;const {error}=await db
+  .from('flight_requests')
+  .insert(payload);status.textContent=error?'Could not send. Please check the form/database setup or message us on Facebook.':'Request sent! This is not yet a confirmed ticket.';if(!error)e.target.reset();returnWrap.classList.add('hidden')});
 </script>
 </body></html>
